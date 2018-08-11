@@ -3,9 +3,6 @@ services:
   couchdb:
     container_name: couchdb
     image: hyperledger/fabric-couchdb
-    environment:
-      - COUCHDB_USER=admin
-      - COUCHDB_PASSWORD=123456
     ports:
       - "5984:5984"
   ca:
@@ -16,10 +13,10 @@ services:
       - FABRIC_CA_SERVER_CA_NAME=ca
       - FABRIC_CA_SERVER_TLS_ENABLED=false
       - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.org1.example.com-cert.pem
-      - FABRIC_CA_SERVER_TLS_KEYTFILE=/etc/hyperledger/fabric-ca-server-config/5433236433d8ed684b2973b438c45642ef782604885091795c2249bc19f0eaed_sk
+      - FABRIC_CA_SERVER_TLS_KEYTFILE=/etc/hyperledger/fabric-ca-server-config/c65d3c289edcbf99a629d87152b61f6ba243859bd0b9e0bb6e8b6a0f6001d5b2_sk
     ports:
       - "7054:7054"
-    command: sh -c 'fabric-ca-server start --ca.certfile /etc/hyperledger/fabric-ca-server-config/ca.org2.example.com-cert.pem --ca.keyfile /etc/hyperledger/fabric-ca-server-config/5433236433d8ed684b2973b438c45642ef782604885091795c2249bc19f0eaed_sk -b admin:adminpw -d' 
+    command: sh -c 'fabric-ca-server start --ca.certfile /etc/hyperledger/fabric-ca-server-config/ca.org2.example.com-cert.pem --ca.keyfile /etc/hyperledger/fabric-ca-server-config/c65d3c289edcbf99a629d87152b61f6ba243859bd0b9e0bb6e8b6a0f6001d5b2_sk -b admin:adminpw -d' 
     volumes:
         - ./crypto-config/peerOrganizations/org2.example.com/ca/:/etc/hyperledger/fabric-ca-server-config
     
@@ -27,7 +24,7 @@ services:
     container_name: foo27.org2.example.com
     image: hyperledger/fabric-peer
     environment:
-      - CORE_LEDGER_STATE_STATEDATABASE=couchDB
+      - CORE_LEDGER_STATE_STATEDATABASE=CouchDB
       - CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS=couchdb:5984
 
       - CORE_PEER_ID=foo27.org2.example.com
